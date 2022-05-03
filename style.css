@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html,
+body
+{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: white;
+  margin: 17vw 13vw;
+  pointer-events: none;
+}
+
+
+h1 {
+  font-size: 6vh;
+}
+
+p {
+  font-size: 2.3vh;
+  width: 50vw;
+  color: rgb(49, 49, 57);
+}
+
+button {
+  font-size: 2.5vh;
+  padding: 1.4vh 2.4vh;
+  margin-top: 3vh;
+  background-color: rgb(0, 114, 255);
+  border: none;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.textMid {
+  width: 70%;
+}
+
+.buttonLearnMore {
+  pointer-events: all;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 27%;
+  width: 20%;
+  pointer-events: all;
+}
+
+.moveDown {
+  margin-top: 35vh;
+}
