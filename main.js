@@ -10,7 +10,65 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { GUI } from 'dat.gui';
 import { gui } from 'dat.gui';
-import Stats from 'three/examples/jsm/libs/stats.module'
+import Stats from 'three/examples/jsm/libs/stats.module';
+
+
+//Event Listeners 
+
+window.addEventListener('resize', (event) => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+window.addEventListener('dblclick', () => {
+    const fullscreenElement =
+        document.fullscreenElement || document.webkitFullscreenElement;
+    if (!fullscreenElement) {
+        if (renderer.domElement.requestFullscreen) {
+            renderer.domElement.requestFullscreen();
+        } else if (renderer.domElement.webkitRequestFullScreen) {
+            renderer.domElement.webkitRequestFullScreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+});
+
+
+//BASIC JS
+
+let link1 = document.querySelector('#link1');
+//console.log(link1);
+
+let link2 = document.querySelector('#link2');
+
+link1.addEventListener('click', playAudio);
+//link2.addEventListener('click', pauseAudio);
+
+let src = './static/inTheClub_Sound.mp3';
+let audio = document.querySelector('#audio');
+audio.src = src;
+
+let soundIcon = document.querySelector('#soundIcon');
+
+function playAudio() {    
+    if(!audio.paused) {
+        audio.pause();
+        soundIcon.src = "./static/volume.png";
+    }
+    else {
+        audio.play();
+        soundIcon.src = "./static/volume-mute-regular-24.png";
+    }
+}
+
+
 
 //Initialize Scene
 
@@ -18,7 +76,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
-    .1,
+    0.1,
     1000
 );
 const renderer = new THREE.WebGL1Renderer({
@@ -50,7 +108,7 @@ controls.minPolarAngle = 0.8;
 //controls.dampingFactor = 0.1;
 //controls.rotateSpeed = 1;
 controls.minDistance = 20;
-controls.maxDistance = 100;
+controls.maxDistance = 75;
 
 //Adding Lights
 
@@ -86,8 +144,8 @@ scene.add(light);
 
 //Adding GLTF Model
 
-const stats = new Stats();
-document.body.appendChild(stats.dom)
+//const stats = new Stats();
+//document.body.appendChild(stats.dom);
 
 const loader = new GLTFLoader();
 
@@ -107,12 +165,13 @@ const panel = new dat.GUI({ width: 110 });
 panel.closed = true;
 panel.add(func, 'makeTwerk').name('Party Mode');
 panel.add(func, 'makeModel').name('Normal Mode');
+panel.hide();
 
 const parameters = {
-  id: 1,
+    id: 1
 };
 
-panel.add(parameters, "id", 0, 1, 1);
+panel.add(parameters, 'id', 0, 1, 1);
 
 let twerkAction, modelAction;
 let actions;
@@ -127,8 +186,6 @@ loader.load(
 
         animations = gltf.animations;
         anim = animations[animationClip];
-
-        
 
         twerkAction = mixer.clipAction(animations[0]);
         modelAction = mixer.clipAction(animations[1]);
@@ -183,6 +240,7 @@ objLoader.load(
                     depthWrite: false
                 });
                 scene.add(child);
+                return child;
             }
         });
     },
@@ -214,7 +272,7 @@ function tick() {
 
     controls.update();
     updateAnimationClip();
-    stats.update();
+    //stats.update();
     mixer.clipAction(animations[0]).play();
     var delta = clock.getDelta();
     if (mixer) mixer.update(delta);
@@ -224,33 +282,11 @@ function tick() {
 
 tick();
 
-window.addEventListener('resize', event => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
-
-window.addEventListener('dblclick', () => {
-    const fullscreenElement =
-        document.fullscreenElement || document.webkitFullscreenElement;
-    if (!fullscreenElement) {
-        if (renderer.domElement.requestFullscreen) {
-            renderer.domElement.requestFullscreen();
-        } else if (renderer.domElement.webkitRequestFullScreen) {
-            renderer.domElement.webkitRequestFullScreen();
-        }
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }
-});
 
 
 function updateAnimationClip() {
-  animationClip = parseInt(parameters.id);
-  anim = animations[animationClip];
+    animationClip = parseInt(parameters.id);
+    anim = animations[animationClip];
 }
+
+function partyMode() {}

@@ -9,6 +9,8 @@
         <title>Senior Show Invite</title>
     </head>
     <body>
+        <script type="module" src="/main.js"></script>
+
         <!--<div class="container">
       <h1>You are invited!</h1>
       <p>I know this might be the coolest Senior Show invite ever, although this is just the teaser. Visit my booth in The Forum, Otis College of Art and Design on 13th May, 2022.
@@ -22,20 +24,34 @@
         <div class="parent" style="position: relative">
             <canvas id="bg"></canvas>
         </div>
-
+        <audio id="audio" src=""></audio>
+        <!--<nav class="mainNav">
+            <a id="link1" href="#">
+                
+                <p class="enableSound">Toggle Sound<img class="" src="./static/music-solid-24.png"></p>
+            </a>
+        </nav>
+    -->
+        
+        
         <section class="text-gray-600 body-font">
             <div
                 class="container flex flex-wrap px-5 py-24 mx-auto items-center moveDown"
             >
                 <div
-                    class="md:w-1/2 md:pr-12 md:py-8"
+                    class="md:w-1/2 md:pr-12 md:py-8 "
                 >
                   <!-- add "md:border-r md:border-b-0 mb-10 md:mb-0 pb-10 border-b border-gray-200" for border-->
-                    <h1
-                        class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
-                    >
-                        You are invited!
-                    </h1>
+                    <div class="long">
+                        <h1
+                            class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900 invited"
+                        >
+                            You are invited!
+                        </h1>
+                        <a class="onTop soundLogo" id="link1" href="#">
+                            <img class="volume" id="soundIcon" src="./static/volume.png" alt="Enable Sound">
+                        </a> 
+                    </div>
                     <p class="leading-relaxed text-base textMid">
                         I know this might be the coolest Senior Show invite
                         ever, although this is just the teaser. Visit my booth
@@ -64,12 +80,12 @@
                       <li class="center">
                         <a href="https://www.aaryansachdeva.com/"><img class="logo" src="./static/Logo_Black.png"></a>
                       </li>
-                      
                     </nav>
                 </div>
             </div>
         </section>
 
-        <script type="module" src="/main.js"></script>
+
+
     </body>
 </html>

@@ -72,5 +72,23 @@ button {
 }
 
 .moveDown {
-  margin-top: 35vh;
+  margin-top: 30vh;
+}
+
+.enableSound {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  z-index: 1;
+  font-size: medium;
+  pointer-events: all;
+}
+
+.onTop {
+  z-index: 1;
+  pointer-events: all;
+}
+
+.volume {
+  width: 2vh;
 }
